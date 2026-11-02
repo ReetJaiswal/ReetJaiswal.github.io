@@ -1,10 +1,13 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Reet Jaiswal | AI & Software Developer</title>
-<meta name="description" content="Portfolio of Reet Jaiswal: backend, AI agents, security and rocketry.">
+<meta name="description" content="Explore Reet Jaiswal's portfolio featuring AI/ML, software engineering, backend development and intelligent systems.">
+<meta property="og:title" content="Reet Jaiswal | AI & Software Developer">
+<meta property="og:description" content="Building intelligent systems, AI applications and reliable software. Explore my projects and experience.">
+<meta property="og:url" content="https://reetjaiswalportfolio.vercel.app/">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#080D1C;--panel:rgba(13,21,44,.66);--line:rgba(160,190,255,.17);--bone:#EAF0FF;--mute:#9AA6C9;--amber:#FFB22E;--cyan:#5CE1E6;--r:18px}
@@ -303,19 +306,19 @@ textarea{resize:none;height:130px;margin-bottom:8px}
   <div class="cert-modal-content">
     <div class="cert-modal-header">
       <h3 id="certTitle">Certificate</h3>
-      <button id="closeCert" aria-label="Close certificate">Ã—</button>
+      <button id="closeCert" aria-label="Close certificate">×</button>
     </div>
     <iframe id="certFrame" title="Certificate viewer"></iframe>
   </div>
 </div>
 
 <aside id="ai" aria-label="Assistant">
-  <div class="ah"><b>Ask about Reet</b><button id="x" aria-label="Close assistant">Ã—</button></div>
+  <div class="ah"><b>Ask about Reet</b><button id="x" aria-label="Close assistant">×</button></div>
   <div class="tabs"><button class="on" data-t="chat">Ask a question</button><button data-t="jd">Match a job</button></div>
   <div class="pane on" id="p-chat">
     <div id="log"></div>
     <div class="sug" id="sug"></div>
-    <form class="in" id="f"><input id="q" placeholder="Ask about skills, projects, experienceâ€¦" autocomplete="off" aria-label="Your question"><button class="btn p" type="submit">Send</button></form>
+    <form class="in" id="f"><input id="q" placeholder="Ask about skills, projects, experience…" autocomplete="off" aria-label="Your question"><button class="btn p" type="submit">Send</button></form>
   </div>
   <div class="pane" id="p-jd">
     <textarea id="jd" placeholder="Paste the job description here, or upload a .txt file below" aria-label="Job description"></textarea>
@@ -333,20 +336,20 @@ const secs=[
 ['home','Home',`<div class="hero-top"><h1>${esc(P.name.split(' ')[0])}<span>${esc(P.name.split(' ').slice(1).join(' '))}</span></h1><div class="tech-stack"><img src="https://skillicons.dev/icons?i=java" alt="Java" /><img src="https://skillicons.dev/icons?i=python" alt="Python" /><img src="https://skillicons.dev/icons?i=react" alt="React" /><img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js" /><img src="https://skillicons.dev/icons?i=fastapi" alt="FastAPI" /><img src="https://skillicons.dev/icons?i=docker" alt="Docker" /><img src="https://skillicons.dev/icons?i=git" alt="Git" /><!-- GitHub --><img src="https://cdn.simpleicons.org/github/181717" alt="GitHub" /><!-- VS Code --><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="Visual Studio Code" /><!-- LangChain logo as a fallback for your LangGraph tool stack --><img src="https://cdn.simpleicons.org/langchain/1C3C3C" alt="LangChain" /></div></div><p class="t">${esc(P.tagline)}</p><div class="row"><button class="btn p" onclick="openAI('chat')">Ask my assistant</button><a class="btn" href="#projects">See my work</a>${P.resume?`<a class="btn" href="${esc(P.resume)}">Resume</a>`:''}</div>`],
 ['about','About',`<h2>About</h2><p class="about">${esc(P.summary)}</p><div class="facts">${chips([P.location,'VIT Chennai, 2027','CGPA '+P.education[0].note.split(' ')[1]])}</div>`],
 ['skills','Skills',`<h2>Skills</h2><div class="grid">${Object.entries(P.skills).map(([k,v])=>`<div class="glass"><h3>${esc(k)}</h3>${chips(v)}</div>`).join('')}</div><p class="m" style="margin-top:18px;color:var(--mute)">Coursework: ${esc(P.coursework.join(', '))}</p>`],
-['experience','Experience',`<h2>Experience</h2><div class="tl">${P.experience.map(e=>`<div class="glass"><h3>${esc(e.title)} Â· ${esc(e.org)}</h3><div class="m">${esc(e.when)} Â· ${esc(e.where)}</div><ul>${e.points.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></div>`).join('')}</div>`],
+['experience','Experience',`<h2>Experience</h2><div class="tl">${P.experience.map(e=>`<div class="glass"><h3>${esc(e.title)} · ${esc(e.org)}</h3><div class="m">${esc(e.when)} · ${esc(e.where)}</div><ul>${e.points.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></div>`).join('')}</div>`],
 ['projects','Projects',`<h2>Projects</h2><div class="grid">${P.projects.map(p=>`<div class="glass proj"><h3>${esc(p.name)}</h3><div class="m">${esc(p.type)}</div><ul>${p.points.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><div style="margin:12px 0">${chips(p.stack)}</div><a href="${esc(p.link)}" target="_blank" rel="noopener">View on GitHub</a></div>`).join('')}</div>`],
 ['rocketry','Rocketry',`<h2>Rocketry</h2><div class="glass"><h3>${esc(P.rocketry.team)}</h3><div style="margin:8px 0 14px">${chips(P.rocketry.stack)}</div>${P.rocketry.items.map(i=>`<h3 style="color:var(--amber);margin-top:14px">${esc(i.title)}</h3><p style="color:#cdd7f3">${esc(i.text)}</p>`).join('')}</div>`],
-['education','Education',`<h2>Education</h2><div class="grid">${P.education.map(e=>`<div class="glass"><h3>${esc(e.what)}</h3><div class="m">${esc(e.where)} Â· ${esc(e.when)}</div><b>${esc(e.note)}</b></div>`).join('')}</div>`],
+['education','Education',`<h2>Education</h2><div class="grid">${P.education.map(e=>`<div class="glass"><h3>${esc(e.what)}</h3><div class="m">${esc(e.where)} · ${esc(e.when)}</div><b>${esc(e.note)}</b></div>`).join('')}</div>`],
 ['certifications', 'Certifications', `
   <h2>Certifications</h2>
   <div class="grid">
     ${P.certifications.map((c, i) =>
       '<div class="glass cert-card">' +
-        '<div class="cert-icon">ðŸ†</div>' +
+        '<div class="cert-icon">🏆</div>' +
         '<h3>' + esc(c.name) + '</h3>' +
-        '<div class="m">' + esc(c.issuer) + ' Â· ' + esc(c.date) + '</div>' +
+        '<div class="m">' + esc(c.issuer) + ' · ' + esc(c.date) + '</div>' +
         '<button class="btn p view-cert" data-cert="' + i + '" type="button">' +
-          'View Certificate â†—' +
+          'View Certificate ↗' +
         '</button>' +
       '</div>'
     ).join('')}
@@ -448,8 +451,8 @@ addEventListener('keydown',e=>{if(e.key==='Escape')$('#x').click()});
 // knowledge base built from data.js
 const KB=[{k:'about summary who introduction',a:P.summary},{k:'contact email phone reach hire',a:`Email ${P.email}, phone ${P.phone}, based in ${P.location}. GitHub: ${P.github}`},
  {k:'skills tech stack languages know',a:Object.entries(P.skills).map(([k,v])=>k+': '+v.join(', ')).join('\n')},
- {k:'education college degree cgpa university school marks',a:P.education.map(e=>`${e.what}, ${e.where} (${e.when}) â€“ ${e.note}`).join('\n')},
- {k:'certifications courses certificates',a:P.certifications.map(c=>`${c.name}${c.issuer?` â€” ${c.issuer}`:''}${c.date?` (${c.date})`:''}`).join('\n')},
+ {k:'education college degree cgpa university school marks',a:P.education.map(e=>`${e.what}, ${e.where} (${e.when}) – ${e.note}`).join('\n')},
+ {k:'certifications courses certificates',a:P.certifications.map(c=>`${c.name}${c.issuer?` — ${c.issuer}`:''}${c.date?` (${c.date})`:''}`).join('\n')},
  {k:'rocketry rocket ignition static fire hardware embedded sensors lora extracurricular',a:P.rocketry.team+'\n'+P.rocketry.items.map(i=>i.title+': '+i.text).join('\n')},
  ...P.experience.map(e=>({k:`experience work job intern ${e.title} ${e.org} ${e.points.join(' ')}`,a:`${e.title} at ${e.org} (${e.when}):\n- `+e.points.join('\n- ')})),
  ...P.projects.map(p=>({k:`project ${p.name} ${p.type} ${p.stack.join(' ')} ${p.points.join(' ')}`,a:`${p.name} (${p.type}) using ${p.stack.join(', ')}:\n- `+p.points.join('\n- ')}))];
@@ -459,10 +462,10 @@ function local(q){const qt=toks(q);if(!qt.length)return"Try asking about Reet's 
  const sc=KB.map(f=>{const ft=new Set(toks(f.k));return[qt.filter(w=>ft.has(w)).length,f]}).filter(x=>x[0]).sort((a,b)=>b[0]-a[0]).slice(0,2);
  return sc.length?sc.map(x=>x[1].a).join('\n\n'):"I don't have that in Reet's profile. You can email her at "+P.email+".";}
 function add(t,w){const d=document.createElement('div');d.className='msg '+w;d.textContent=t;$('#log').append(d);$('#log').scrollTop=1e9;return d}
-const hist=[];async function ask(q){add(q,'u');const m=add('â€¦','a');let r;
+const hist=[];async function ask(q){add(q,'u');const m=add('…','a');let r;
  if(P.AI_ENDPOINT){try{const x=await fetch(P.AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,history:hist.slice(-6),profile:P})});r=(await x.json()).reply}catch(e){r=null}}
  m.textContent=r||local(q);hist.push({role:"user",content:q},{role:"assistant",content:m.textContent})}
-add("Hi! I can answer questions about Reet's background, or check how well she fits a role. Use â€œMatch a jobâ€ to paste a job description.",'a');
+add("Hi! I can answer questions about Reet's background, or check how well she fits a role. Use \"Match a job\" to paste a job description.",'a');
 $('#sug').innerHTML=['What has she built?','Does she know Docker?','Tell me about her security work'].map(s=>`<button>${s}</button>`).join('');
 $('#sug').onclick=e=>{if(e.target.tagName==='BUTTON')ask(e.target.textContent)};
 $('#f').onsubmit=e=>{e.preventDefault();const v=$('#q').value.trim();if(v){$('#q').value='';ask(v)}};
@@ -494,7 +497,7 @@ $('#go').onclick = async () => {
     const n = document.createElement('div');
     n.className = 'msg a';
     n.style.maxWidth = '100%';
-    n.textContent = 'Writing detailed analysisâ€¦';
+    n.textContent = 'Writing detailed analysis…';
     $('#res').append(n);
 
     try {
@@ -526,7 +529,7 @@ $('#cf').onsubmit = async e => {
   const s = $('#cfs');
 
   if (P.FORM_ENDPOINT) {
-    s.textContent = 'Sendingâ€¦';
+    s.textContent = 'Sending…';
     try {
       const r = await fetch(P.FORM_ENDPOINT, {
         method: 'POST',
@@ -546,7 +549,7 @@ $('#cf').onsubmit = async e => {
     }
   } else {
     location.href = 'mailto:' + P.email + '?subject=' + encodeURIComponent('Portfolio message from ' + d.name) + '&body=' + encodeURIComponent(d.message + '\n\n' + d.name + ' (' + d.email + ')');
-    s.textContent = 'Opening your email appâ€¦';
+    s.textContent = 'Opening your email app…';
   }
 };
 </script>
