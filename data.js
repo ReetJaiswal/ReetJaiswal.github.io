@@ -1,8 +1,8 @@
 const PROFILE = {
   name: "Reet Jaiswal",
-  role: "Software and AI Engineer",
+  role: "AI & Software Developer",
   pronouns: "she/her",
-  tagline: "I build backend systems, AI agents and secure deployment pipelines.",
+  tagline: "I build AI-powered products, backend systems, and reliable software.",
   location: "Mumbai, India",
   email: "reet.vj@gmail.com",
   phone: "+91 9321908018",
