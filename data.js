@@ -1,6 +1,6 @@
 const PROFILE = {
   name: "Reet Jaiswal",
-  role: "Software Engineer",
+  role: "Software Engineer and AI Engineer",
   pronouns: "she/her",
   tagline: "I build backend systems, AI agents and secure deployment pipelines.",
   location: "Mumbai, India",
@@ -66,6 +66,7 @@ const PROFILE = {
       file: "assets/certificates/100daystocode.pdf"
     },
     {
+
       name: "Machine Learning Specialization",
       issuer: "Stanford Online & DeepLearning.AI",
       date: "2026",
