@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Reet Jaiswal – Software Engineer</title>
+<meta name="description" content="Portfolio of Reet Jaiswal: backend, AI agents, security and rocketry.">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#080D1C;--panel:rgba(13,21,44,.66);--line:rgba(160,190,255,.17);--bone:#EAF0FF;--mute:#9AA6C9;--amber:#FFB22E;--cyan:#5CE1E6;--r:18px}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--ink);color:var(--bone);font:400 16px/1.65 Figtree,system-ui,sans-serif;padding-bottom:env(safe-area-inset-bottom)}
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+h1,h2,h3{font-family:Unbounded,sans-serif;font-weight:500;line-height:1.15}
+nav{position:fixed;z-index:20;top:0;left:0;right:0;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;display:flex;gap:6px;align-items:center;justify-content:center;background:linear-gradient(var(--ink),transparent)}
+nav .links{display:flex;gap:2px;padding:4px;border:1px solid var(--line);border-radius:99px;background:var(--panel);backdrop-filter:blur(14px);overflow-x:auto;max-width:100%;scrollbar-width:none}
+nav a{padding:7px 14px;border-radius:99px;text-decoration:none;font-size:14px;color:var(--mute);white-space:nowrap}
+nav a.on{background:var(--amber);color:#1a1000;font-weight:600}
+@media(max-width:700px){nav{top:auto;bottom:0;padding:10px 10px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--ink) 60%)}}
+#throttle{position:fixed;z-index:15;right:14px;top:50%;transform:translateY(-50%);height:40vh;width:4px;border-radius:4px;background:var(--line)}
+#throttle i{position:absolute;bottom:0;left:0;right:0;border-radius:4px;background:linear-gradient(var(--cyan),var(--amber));height:0}
+#throttle b{position:absolute;right:12px;font:500 11px Figtree;color:var(--mute);writing-mode:vertical-rl;top:0;white-space:nowrap}
+@media(max-width:700px){#throttle{display:none}}
+main{position:relative;z-index:5}
+section{min-height:100svh;padding:110px 20px 90px;max-width:1040px;margin:auto;display:flex;flex-direction:column;justify-content:center}
+#home{align-items:flex-start}
+#home h1{font-size:clamp(40px,10vw,112px);font-weight:700;letter-spacing:-.03em}
+#home h1 span{text-shadow:0 0 44px rgba(255,178,46,.4);display:block;-webkit-text-stroke:1.5px var(--amber);color:transparent}
+#home p.t{font-size:clamp(17px,2.4vw,24px);max-width:30ch;margin:22px 0 30px;color:var(--mute)}
+.btn{display:inline-block;padding:13px 22px;border-radius:99px;font-weight:600;text-decoration:none;border:1px solid var(--line);background:var(--panel);backdrop-filter:blur(10px);cursor:pointer;color:var(--bone);font-family:inherit;font-size:15px}
+.btn.p{background:var(--amber);color:#1a1000;border-color:var(--amber)}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+h2{font-size:clamp(26px,4.5vw,44px);margin-bottom:28px}
+.glass{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:24px;backdrop-filter:blur(14px)}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))}
+.chip{display:inline-block;padding:4px 12px;margin:3px 4px 3px 0;border:1px solid var(--line);border-radius:99px;font-size:13px;color:var(--cyan)}
+.about{font-size:clamp(18px,2.4vw,24px);line-height:1.6;max-width:42ch}
+.facts{margin-top:26px;display:flex;gap:10px;flex-wrap:wrap}
+.glass h3{font-size:17px;margin-bottom:6px}
+.glass .m{color:var(--mute);font-size:14px;margin-bottom:10px}
+.glass ul{padding-left:18px;color:#cdd7f3;font-size:15px}.glass li{margin:6px 0}
+.tl{display:grid;gap:16px;border-left:2px solid var(--amber);padding-left:18px}
+.proj{transform-style:preserve-3d;transition:transform .15s ease-out;will-change:transform}
+.proj h3{color:var(--amber)}
+.ct a.big{font:500 clamp(20px,4vw,38px) Unbounded;text-decoration:none;word-break:break-all}
+.ct a.big:hover{color:var(--amber)}
+/* assistant */
+#fab{position:fixed;z-index:30;right:16px;bottom:calc(86px + env(safe-area-inset-bottom));padding:14px 20px;box-shadow:0 0 30px rgba(255,178,46,.4)}
+@media(min-width:701px){#fab{bottom:24px}}
+#ai{position:fixed;z-index:40;right:0;bottom:0;width:min(440px,100%);height:min(680px,86svh);display:none;flex-direction:column;background:#0b1330;border:1px solid var(--line);border-radius:var(--r) var(--r) 0 0;overflow:hidden}
+@media(min-width:701px){#ai{right:24px;bottom:24px;border-radius:var(--r)}}
+#ai.open{display:flex}
+.ah{display:flex;align-items:center;padding:12px 14px;gap:8px;border-bottom:1px solid var(--line)}
+.ah b{font:500 15px Unbounded;flex:1}
+.ah button{background:none;border:0;color:var(--mute);font-size:22px;cursor:pointer}
+.tabs{display:flex;gap:6px;padding:10px 14px 0}
+.tabs button{flex:1;padding:8px;border-radius:10px;border:1px solid var(--line);background:none;color:var(--mute);cursor:pointer;font:inherit;font-size:14px}
+.tabs button.on{background:var(--amber);color:#1a1000;border-color:var(--amber);font-weight:600}
+.pane{display:none;flex:1;min-height:0;flex-direction:column;padding:12px 14px 14px}.pane.on{display:flex}
+#log,#res{flex:1;overflow-y:auto;font-size:15px}
+.msg{padding:10px 13px;border-radius:14px;margin:8px 0;max-width:92%;white-space:pre-wrap}
+.msg.u{background:var(--amber);color:#1a1000;margin-left:auto}.msg.a{background:rgba(255,255,255,.07)}
+.sug{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.sug button{font:inherit;font-size:13px;padding:6px 11px;border-radius:99px;border:1px solid var(--line);background:none;color:var(--cyan);cursor:pointer}
+.in{display:flex;gap:8px;margin-top:8px}
+.in input,textarea{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:12px;color:var(--bone);padding:11px;font:inherit;font-size:15px;width:100%}
+textarea{resize:none;height:130px;margin-bottom:8px}
+.score{font:700 44px Unbounded;color:var(--amber)}
+.bar{height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin:6px 0 14px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--amber))}
+.gap{color:#ff9d8a}
+.rv{opacity:0;transform:perspective(900px) rotateX(14deg) translateY(36px);transition:opacity .7s,transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.rv.in{opacity:1;transform:none}
+.cf{display:grid;gap:10px;margin-top:34px;max-width:560px}
+.cf input{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:12px;color:var(--bone);padding:12px;font:inherit;width:100%}
+.cf textarea{height:120px;margin:0}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.proj{transition:none}.rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<nav aria-label="Sections"><div class="links" id="links"></div></nav>
+<div id="throttle" aria-hidden="true"><i></i><b>Throttle</b></div>
+<main id="main"></main>
+<button class="btn p" id="fab" aria-expanded="false">Ask my assistant</button>
+
+<aside id="ai" aria-label="Assistant">
+  <div class="ah"><b>Ask about Reet</b><button id="x" aria-label="Close assistant">×</button></div>
+  <div class="tabs"><button class="on" data-t="chat">Ask a question</button><button data-t="jd">Match a job</button></div>
+  <div class="pane on" id="p-chat">
+    <div id="log"></div>
+    <div class="sug" id="sug"></div>
+    <form class="in" id="f"><input id="q" placeholder="Ask about skills, projects, experience…" autocomplete="off" aria-label="Your question"><button class="btn p" type="submit">Send</button></form>
+  </div>
+  <div class="pane" id="p-jd">
+    <textarea id="jd" placeholder="Paste the job description here, or upload a .txt file below" aria-label="Job description"></textarea>
+    <div class="row" style="margin-bottom:10px"><input type="file" id="file" accept=".txt,.md" style="max-width:55%;font-size:13px"><button class="btn p" id="go" style="margin-left:auto">Analyse fit</button></div>
+    <div id="res"></div>
+  </div>
+</aside>
+
+<script src="data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const P=PROFILE,$=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const chips=a=>a.map(x=>`<span class="chip">${esc(x)}</span>`).join('');
+const secs=[
+['home','Home',`<h1>${esc(P.name.split(' ')[0])}<span>${esc(P.name.split(' ').slice(1).join(' '))}</span></h1><p class="t">${esc(P.tagline)}</p><div class="row"><button class="btn p" onclick="openAI('chat')">Ask my assistant</button><a class="btn" href="#projects">See my work</a>${P.resume?`<a class="btn" href="${esc(P.resume)}">Resume</a>`:''}</div>`],
+['about','About',`<h2>About</h2><p class="about">${esc(P.summary)}</p><div class="facts">${chips([P.location,'VIT Chennai, 2027','CGPA '+P.education[0].note.split(' ')[1]])}</div>`],
+['skills','Skills',`<h2>Skills</h2><div class="grid">${Object.entries(P.skills).map(([k,v])=>`<div class="glass"><h3>${esc(k)}</h3>${chips(v)}</div>`).join('')}</div><p class="m" style="margin-top:18px;color:var(--mute)">Coursework: ${esc(P.coursework.join(', '))}</p>`],
+['experience','Experience',`<h2>Experience</h2><div class="tl">${P.experience.map(e=>`<div class="glass"><h3>${esc(e.title)} · ${esc(e.org)}</h3><div class="m">${esc(e.when)} · ${esc(e.where)}</div><ul>${e.points.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></div>`).join('')}</div>`],
+['projects','Projects',`<h2>Projects</h2><div class="grid">${P.projects.map(p=>`<div class="glass proj"><h3>${esc(p.name)}</h3><div class="m">${esc(p.type)}</div><ul>${p.points.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><div style="margin:12px 0">${chips(p.stack)}</div><a href="${esc(p.link)}" target="_blank" rel="noopener">View on GitHub</a></div>`).join('')}</div>`],
+['rocketry','Rocketry',`<h2>Rocketry</h2><div class="glass"><h3>${esc(P.rocketry.team)}</h3><div style="margin:8px 0 14px">${chips(P.rocketry.stack)}</div>${P.rocketry.items.map(i=>`<h3 style="color:var(--amber);margin-top:14px">${esc(i.title)}</h3><p style="color:#cdd7f3">${esc(i.text)}</p>`).join('')}</div>`],
+['education','Education',`<h2>Education &amp; certificates</h2><div class="grid">${P.education.map(e=>`<div class="glass"><h3>${esc(e.what)}</h3><div class="m">${esc(e.where)} · ${esc(e.when)}</div><b>${esc(e.note)}</b></div>`).join('')}<div class="glass"><h3>Certifications</h3><ul>${P.certifications.map(c=>`<li>${esc(c)}</li>`).join('')}</ul></div></div>`],
+['contact','Contact',`<h2>Let's talk</h2><div class="ct"><a class="big" href="mailto:${esc(P.email)}">${esc(P.email)}</a><div class="row" style="margin-top:26px"><a class="btn p" href="tel:${esc(P.phone.replace(/\s/g,''))}">${esc(P.phone)}</a><a class="btn" href="${esc(P.github)}" target="_blank" rel="noopener">GitHub</a><a class="btn" href="${esc(P.linkedin)}" target="_blank" rel="noopener">LinkedIn</a></div><form class="cf" id="cf"><input name="name" placeholder="Your name" required aria-label="Your name"><input name="email" type="email" placeholder="Your email" required aria-label="Your email"><textarea name="message" placeholder="How can I help?" required aria-label="Message"></textarea><button class="btn p" type="submit">Send message</button><div id="cfs" role="status" style="color:var(--cyan);font-size:14px"></div></form></div>`]
+];
+$('#main').innerHTML=secs.map(s=>`<section id="${s[0]}">${s[2]}</section>`).join('');
+$('#links').innerHTML=secs.map(s=>`<a href="#${s[0]}" data-s="${s[0]}">${s[1]}</a>`).join('');
+// active nav + throttle
+const th=$('#throttle i');
+function onScroll(){const m=document.documentElement.scrollHeight-innerHeight,p=m>0?scrollY/m:0;th.style.height=(p*100)+'%';
+ let cur=secs[0][0];secs.forEach(s=>{if($('#'+s[0]).getBoundingClientRect().top<innerHeight*.5)cur=s[0]});
+ document.querySelectorAll('nav a').forEach(a=>{const on=a.dataset.s===cur;a.classList.toggle('on',on);if(on&&innerWidth<700)a.scrollIntoView({inline:'center',block:'nearest'})});}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+// card tilt
+document.querySelectorAll('.proj').forEach(c=>{c.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(800px) rotateY(${x*10}deg) rotateX(${-y*10}deg)`});c.addEventListener('pointerleave',()=>c.style.transform='')});
+
+// scroll reveal: panels unfold into place
+(function(){if(matchMedia('(prefers-reduced-motion:reduce)').matches||!window.IntersectionObserver)return;
+const els=[...document.querySelectorAll('.glass,section h2')];
+els.forEach(e=>{e.classList.add('rv');e.style.setProperty('--i',[...e.parentElement.children].indexOf(e)%6)});
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);setTimeout(()=>x.target.classList.remove('rv','in'),1500)}}),{threshold:.12});
+els.forEach(e=>io.observe(e))})();
+// ---------- 3D: engine nozzle + particle plume; scroll flies the camera down the exhaust ----------
+(function(){
+ if(!window.THREE)return;
+ const cv=$('#gl'),R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true}),S=new THREE.Scene(),C=new THREE.PerspectiveCamera(55,1,.1,100);
+ R.setPixelRatio(Math.min(devicePixelRatio,2));
+ const N=innerWidth<700?2500:6000,pos=new Float32Array(N*3),col=new Float32Array(N*3),A=new Float32Array(N),K=new Float32Array(N),Y=new Float32Array(N),L=16;
+ for(let i=0;i<N;i++){A[i]=Math.random()*6.28;K[i]=Math.random();Y[i]=-Math.random()*L}
+ const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pos,3));g.setAttribute('color',new THREE.BufferAttribute(col,3));
+ S.add(new THREE.Points(g,new THREE.PointsMaterial({size:.05,vertexColors:true,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false})));
+ const sg=new THREE.BufferGeometry(),sa=new Float32Array(1800*3);for(let i=0;i<sa.length;i++)sa[i]=(Math.random()-.5)*(i%3==1?60:40);
+ sg.setAttribute('position',new THREE.BufferAttribute(sa,3));const stars=new THREE.Points(sg,new THREE.PointsMaterial({size:.04,color:0x9aa6c9,transparent:true,opacity:.6}));S.add(stars);
+ const noz=new THREE.Group(),m=new THREE.MeshBasicMaterial({color:0xffb22e,wireframe:true,transparent:true,opacity:.55});
+ noz.add(new THREE.Mesh(new THREE.CylinderGeometry(.9,.35,1.8,28,5,true),m));
+ for(let i=0;i<3;i++){const t=new THREE.Mesh(new THREE.TorusGeometry(1.1+i*.5,.012,6,64),new THREE.MeshBasicMaterial({color:0x5ce1e6,transparent:true,opacity:.5-i*.12}));t.rotation.x=Math.PI/2;t.position.y=-1.4-i*2.2;noz.add(t)}
+ noz.position.y=.9;S.add(noz);
+ const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;let mx=0,my=0,sp=.05,last=scrollY,t=0;
+ addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+ function size(){R.setSize(innerWidth,innerHeight,false);C.aspect=innerWidth/innerHeight;C.updateProjectionMatrix()}addEventListener('resize',size);size();
+ const c1=new THREE.Color(0xffb22e),c2=new THREE.Color(0x5ce1e6),c=new THREE.Color();
+ function frame(){t+=.01;const m2=document.documentElement.scrollHeight-innerHeight,p=m2>0?scrollY/m2:0;
+  sp+=((.04+Math.min(Math.abs(scrollY-last)*.01,.5))-sp)*.08;last=scrollY;
+  for(let i=0;i<N;i++){if(!reduce)Y[i]-=sp*(.4+K[i]);if(Y[i]<-L)Y[i]=0;const d=-Y[i],r=(.25+d*.16)*(.3+K[i]*.7),a=A[i]+t*(.4+K[i]);
+   pos[i*3]=Math.cos(a)*r;pos[i*3+1]=Y[i];pos[i*3+2]=Math.sin(a)*r;
+   const f=d/L;c.copy(c1).lerp(c2,Math.min(f*1.6,1)).multiplyScalar(1-f*.85);col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b}
+  g.attributes.position.needsUpdate=g.attributes.color.needsUpdate=true;
+  const ang=p*Math.PI*2.2+mx*.6,rad=innerWidth<700?9:7,cy=1.5-p*L*.75;
+  C.position.set(Math.sin(ang)*rad,cy+my*1.2,Math.cos(ang)*rad);C.lookAt(0,cy-2.2,0);
+  noz.rotation.y=t*.3;noz.children.forEach((o,i)=>{if(i)o.scale.setScalar(1+Math.sin(t*3-i)*.06)});stars.position.y=cy*.6;R.render(S,C);if(!reduce)requestAnimationFrame(frame)}
+ frame();if(reduce)addEventListener('scroll',frame,{passive:true});
+})();
+
+// ---------- Assistant ----------
+function openAI(t){$('#ai').classList.add('open');$('#fab').setAttribute('aria-expanded','true');tab(t||'chat');(t==='jd'?$('#jd'):$('#q')).focus()}
+function tab(t){document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));$('#p-chat').classList.toggle('on',t==='chat');$('#p-jd').classList.toggle('on',t==='jd')}
+$('#fab').onclick=()=>openAI();$('#x').onclick=()=>{$('#ai').classList.remove('open');$('#fab').setAttribute('aria-expanded','false')};
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>tab(b.dataset.t));
+addEventListener('keydown',e=>{if(e.key==='Escape')$('#x').click()});
+// knowledge base built from data.js
+const KB=[{k:'about summary who introduction',a:P.summary},{k:'contact email phone reach hire',a:`Email ${P.email}, phone ${P.phone}, based in ${P.location}. GitHub: ${P.github}`},
+ {k:'skills tech stack languages know',a:Object.entries(P.skills).map(([k,v])=>k+': '+v.join(', ')).join('\n')},
+ {k:'education college degree cgpa university school marks',a:P.education.map(e=>`${e.what}, ${e.where} (${e.when}) – ${e.note}`).join('\n')},
+ {k:'certifications courses certificates',a:P.certifications.join('\n')},
+ {k:'rocketry rocket ignition static fire hardware embedded sensors lora extracurricular',a:P.rocketry.team+'\n'+P.rocketry.items.map(i=>i.title+': '+i.text).join('\n')},
+ ...P.experience.map(e=>({k:`experience work job intern ${e.title} ${e.org} ${e.points.join(' ')}`,a:`${e.title} at ${e.org} (${e.when}):\n- `+e.points.join('\n- ')})),
+ ...P.projects.map(p=>({k:`project ${p.name} ${p.type} ${p.stack.join(' ')} ${p.points.join(' ')}`,a:`${p.name} (${p.type}) using ${p.stack.join(', ')}:\n- `+p.points.join('\n- ')}))];
+const STOP=new Set('the a an and or of to in on for with is are was do does did you your he his reet what which who how can about tell me any have has'.split(' '));
+const toks=s=>s.toLowerCase().split(/[^a-z0-9+#.]+/).filter(w=>w&&!STOP.has(w));
+function local(q){const qt=toks(q);if(!qt.length)return"Try asking about Reet's skills, projects, experience, education or rocketry.";
+ const sc=KB.map(f=>{const ft=new Set(toks(f.k));return[qt.filter(w=>ft.has(w)).length,f]}).filter(x=>x[0]).sort((a,b)=>b[0]-a[0]).slice(0,2);
+ return sc.length?sc.map(x=>x[1].a).join('\n\n'):"I don't have that in Reet's profile. You can email him at "+P.email+".";}
+function add(t,w){const d=document.createElement('div');d.className='msg '+w;d.textContent=t;$('#log').append(d);$('#log').scrollTop=1e9;return d}
+const hist=[];async function ask(q){add(q,'u');const m=add('…','a');let r;
+ if(P.AI_ENDPOINT){try{const x=await fetch(P.AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,history:hist.slice(-6),profile:P})});r=(await x.json()).reply}catch(e){r=null}}
+ m.textContent=r||local(q);hist.push({role:"user",content:q},{role:"assistant",content:m.textContent})}
+add("Hi! I can answer questions about Reet's background, or check how well he fits a role. Use “Match a job” to paste a job description.",'a');
+$('#sug').innerHTML=['What has he built?','Does he know Docker?','Tell me about his security work'].map(s=>`<button>${s}</button>`).join('');
+$('#sug').onclick=e=>{if(e.target.tagName==='BUTTON')ask(e.target.textContent)};
+$('#f').onsubmit=e=>{e.preventDefault();const v=$('#q').value.trim();if(v){$('#q').value='';ask(v)}};
+// job match
+const has=(txt,t)=>new RegExp('(^|[^a-z0-9+#])'+t.replace(/[.*+?^${}()|[\]\\\/]/g,'\\$&')+'([^a-z0-9+#]|$)').test(txt);
+const corpus=JSON.stringify([P.experience,P.projects,P.rocketry]).toLowerCase();
+function analyse(jd){const t=jd.toLowerCase(),found=[...HAVE,...EXTRA].filter(x=>has(t,x)),yes=found.filter(x=>HAVE.includes(x)),no=found.filter(x=>!HAVE.includes(x));
+ const yrs=[...t.matchAll(/(\d+)\s*\+?\s*(?:years|yrs)/g)].map(m=>+m[1]),maxY=yrs.length?Math.max(...yrs):0;
+ if(!found.length)return'<p>I couldn\'t find recognisable technical requirements. Paste the full description including the skills section.</p>';
+ let s=Math.round(yes.length/found.length*100);if(maxY>=3)s=Math.max(0,s-15);
+ const v=s>=70?'Strong match on skills.':s>=45?'Good match with some gaps.':'Partial match. Several required skills are missing.';
+ const ev=yes.filter(x=>has(corpus,x)).slice(0,6);
+ return`<div class="score">${s}%</div><div class="bar"><i style="width:${s}%"></i></div><p><b>${v}</b></p>
+ <p style="margin-top:10px"><b>Matching (${yes.length})</b><br>${chips(yes)}</p>
+ ${no.length?`<p style="margin-top:10px"><b class="gap">Not listed (${no.length})</b><br>${chips(no)}</p>`:''}
+ ${ev.length?`<p style="margin-top:10px"><b>Demonstrated in projects or work</b><br>${esc(ev.join(', '))}</p>`:''}
+ ${maxY?`<p class="gap" style="margin-top:10px">The role mentions ${maxY}+ years. Reet is a final-year student with a 2025 internship and a 2026 freelance role, so experience may be below that.</p>`:''}
+ <p style="margin-top:12px;color:var(--mute);font-size:13px">Keyword-based estimate. Ask the assistant about specific skills for detail.</p>`}
+$('#go').onclick=async()=>{const v=$('#jd').value.trim();if(!v){$('#res').innerHTML='<p>Paste a job description first.</p>';return}
+ $('#res').innerHTML=analyse(v);
+ if(P.AI_ENDPOINT){const n=document.createElement('div');n.className='msg a';n.style.maxWidth='100%';n.textContent='Writing detailed analysis…';$('#res').append(n);
+  try{const x=await fetch(P.AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mode:'jd',jd:v.slice(0,12000),profile:P})});n.textContent=(await x.json()).reply||'Detailed analysis unavailable.'}catch(_){n.textContent='Detailed analysis unavailable. The score above still applies.'}}};
+$('#file').onchange=async e=>{const f=e.target.files[0];if(f){$('#jd').value=await f.text();$('#go').click()}};
+// contact form
+$('#cf').onsubmit=async e=>{e.preventDefault();const f=e.target,d=Object.fromEntries(new FormData(f)),s=$('#cfs');
+ if(P.FORM_ENDPOINT){s.textContent='Sending…';try{const r=await fetch(P.FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)});if(!r.ok)throw 0;s.textContent='Message sent. Thanks, I will reply soon.';f.reset()}catch(_){s.textContent='Could not send. Email me at '+P.email+' instead.'}}
+ else{location.href='mailto:'+P.email+'?subject='+encodeURIComponent('Portfolio message from '+d.name)+'&body='+encodeURIComponent(d.message+'\n\n'+d.name+' ('+d.email+')');s.textContent='Opening your email app…'}};
+</script>
+</body>
+</html>
