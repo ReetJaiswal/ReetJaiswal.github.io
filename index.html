@@ -27,8 +27,8 @@ nav a.on{background:var(--amber);color:#1a1000;font-weight:600}
 main{position:relative;z-index:5}
 section{min-height:100svh;padding:110px 20px 90px;max-width:1040px;margin:auto;display:flex;flex-direction:column;justify-content:center}
 #home{align-items:flex-start}
-#home h1{font-size:clamp(40px,10vw,112px);font-weight:700;letter-spacing:-.03em}
-#home h1 span{text-shadow:0 0 44px rgba(255,178,46,.4);display:block;-webkit-text-stroke:1.5px var(--amber);color:transparent}
+#home h1{font-size:clamp(40px,10vw,112px);font-weight:700;letter-spacing:-.03em;color:#fff}
+#home h1 span{text-shadow:0 0 44px rgba(255,178,46,.4);display:block;color:#fff}
 #home p.t{font-size:clamp(17px,2.4vw,24px);max-width:30ch;margin:22px 0 30px;color:var(--mute)}
 .btn{display:inline-block;padding:13px 22px;border-radius:99px;font-weight:600;text-decoration:none;border:1px solid var(--line);background:var(--panel);backdrop-filter:blur(10px);cursor:pointer;color:var(--bone);font-family:inherit;font-size:15px}
 .btn.p{background:var(--amber);color:#1a1000;border-color:var(--amber)}
@@ -70,7 +70,7 @@ textarea{resize:none;height:130px;margin-bottom:8px}
 .score{font:700 44px Unbounded;color:var(--amber)}
 .bar{height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin:6px 0 14px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--amber))}
 .gap{color:#ff9d8a}
-.rv{opacity:0;transform:perspective(900px) rotateX(14deg) translateY(36px);transition:opacity .7s,transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .45s ease,transform .5s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*35ms)}
 .rv.in{opacity:1;transform:none}
 .cf{display:grid;gap:10px;margin-top:34px;max-width:560px}
 .cf input{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:12px;color:var(--bone);padding:12px;font:inherit;width:100%}
@@ -130,7 +130,7 @@ document.querySelectorAll('.proj').forEach(c=>{c.addEventListener('pointermove',
 (function(){if(matchMedia('(prefers-reduced-motion:reduce)').matches||!window.IntersectionObserver)return;
 const els=[...document.querySelectorAll('.glass,section h2')];
 els.forEach(e=>{e.classList.add('rv');e.style.setProperty('--i',[...e.parentElement.children].indexOf(e)%6)});
-const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);setTimeout(()=>x.target.classList.remove('rv','in'),1500)}}),{threshold:.12});
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);setTimeout(()=>x.target.classList.remove('rv','in'),1500)}}),{threshold:0,rootMargin:'0px 0px 20% 0px'});
 els.forEach(e=>io.observe(e))})();
 // ---------- 3D: engine nozzle + particle plume; scroll flies the camera down the exhaust ----------
 (function(){
@@ -177,17 +177,17 @@ const KB=[{k:'about summary who introduction',a:P.summary},{k:'contact email pho
  {k:'rocketry rocket ignition static fire hardware embedded sensors lora extracurricular',a:P.rocketry.team+'\n'+P.rocketry.items.map(i=>i.title+': '+i.text).join('\n')},
  ...P.experience.map(e=>({k:`experience work job intern ${e.title} ${e.org} ${e.points.join(' ')}`,a:`${e.title} at ${e.org} (${e.when}):\n- `+e.points.join('\n- ')})),
  ...P.projects.map(p=>({k:`project ${p.name} ${p.type} ${p.stack.join(' ')} ${p.points.join(' ')}`,a:`${p.name} (${p.type}) using ${p.stack.join(', ')}:\n- `+p.points.join('\n- ')}))];
-const STOP=new Set('the a an and or of to in on for with is are was do does did you your he his reet what which who how can about tell me any have has'.split(' '));
+const STOP=new Set('the a an and or of to in on for with is are was do does did you your he his she her reet what which who how can about tell me any have has'.split(' '));
 const toks=s=>s.toLowerCase().split(/[^a-z0-9+#.]+/).filter(w=>w&&!STOP.has(w));
 function local(q){const qt=toks(q);if(!qt.length)return"Try asking about Reet's skills, projects, experience, education or rocketry.";
  const sc=KB.map(f=>{const ft=new Set(toks(f.k));return[qt.filter(w=>ft.has(w)).length,f]}).filter(x=>x[0]).sort((a,b)=>b[0]-a[0]).slice(0,2);
- return sc.length?sc.map(x=>x[1].a).join('\n\n'):"I don't have that in Reet's profile. You can email him at "+P.email+".";}
+ return sc.length?sc.map(x=>x[1].a).join('\n\n'):"I don't have that in Reet's profile. You can email her at "+P.email+".";}
 function add(t,w){const d=document.createElement('div');d.className='msg '+w;d.textContent=t;$('#log').append(d);$('#log').scrollTop=1e9;return d}
 const hist=[];async function ask(q){add(q,'u');const m=add('…','a');let r;
  if(P.AI_ENDPOINT){try{const x=await fetch(P.AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,history:hist.slice(-6),profile:P})});r=(await x.json()).reply}catch(e){r=null}}
  m.textContent=r||local(q);hist.push({role:"user",content:q},{role:"assistant",content:m.textContent})}
-add("Hi! I can answer questions about Reet's background, or check how well he fits a role. Use “Match a job” to paste a job description.",'a');
-$('#sug').innerHTML=['What has he built?','Does he know Docker?','Tell me about his security work'].map(s=>`<button>${s}</button>`).join('');
+add("Hi! I can answer questions about Reet's background, or check how well she fits a role. Use “Match a job” to paste a job description.",'a');
+$('#sug').innerHTML=['What has she built?','Does she know Docker?','Tell me about her security work'].map(s=>`<button>${s}</button>`).join('');
 $('#sug').onclick=e=>{if(e.target.tagName==='BUTTON')ask(e.target.textContent)};
 $('#f').onsubmit=e=>{e.preventDefault();const v=$('#q').value.trim();if(v){$('#q').value='';ask(v)}};
 // job match

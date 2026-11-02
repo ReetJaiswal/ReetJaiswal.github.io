@@ -1,6 +1,7 @@
 const PROFILE = {
   name: "Reet Jaiswal",
   role: "Software Engineer",
+  pronouns: "she/her",
   tagline: "I build backend systems, AI agents and secure deployment pipelines.",
   location: "Mumbai, India",
   email: "reet.vj@gmail.com",
@@ -8,9 +9,7 @@ const PROFILE = {
   github: "https://github.com/ReetJaiswal",
   linkedin: "https://www.linkedin.com/in/reet-jaiswal/", 
   resume: "ReetJaiswal.pdf", 
-  // Optional: URL of a small server that calls an LLM. See README. Leave "" to use the built-in offline assistant.
   AI_ENDPOINT: "",
-  // Optional: Formspree (or similar) form URL so the contact form emails you directly. Leave "" to open the visitor's email app instead.
   FORM_ENDPOINT: "",
   summary: "Final-year Computer Science student at VIT Chennai with hands-on experience building backend systems, full-stack applications and automated deployment pipelines. Strong foundation in software engineering, AI-driven system architecture, information security and GenAI. Seeking a Software Engineer role to build reliable, scalable software within a collaborative team.",
   skills: {
@@ -63,6 +62,5 @@ const PROFILE = {
     ]
   }
 };
-
 const HAVE = ["python","java","c++","javascript","typescript","sql","html","css","react","next.js","node.js","fastapi","jwt","oauth","rbac","langchain","langgraph","rag","ai agents","llm","scikit-learn","numpy","pandas","tensorflow","ollama","gpt","mysql","postgresql","redis","git","docker","github","ci/cd","webhooks","aws","burp suite","nessus","kali","owasp","penetration testing","vulnerability","security","rest","api","openapi","vector","embeddings","machine learning","generative ai","linux","system design","dsa","data structures","algorithms","operating systems","networking","oop","multi-tenant","authentication","testing","deployment","backend","full-stack","full stack","agile"];
 const EXTRA = ["kubernetes","golang","go","rust","c#",".net","spring boot","spring","django","flask","angular","vue","graphql","kafka","rabbitmq","mongodb","elasticsearch","terraform","azure","gcp","jenkins","ansible","pytorch","spark","hadoop","airflow","swift","kotlin","android","ios","php","ruby","scala","microservices","grpc","cassandra","dynamodb","snowflake","tableau","power bi","selenium","devops","sre"];

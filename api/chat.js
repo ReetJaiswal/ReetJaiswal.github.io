@@ -1,5 +1,3 @@
-// Vercel serverless function: powers the portfolio assistant with a real LLM.
-// Env vars (Vercel dashboard): ANTHROPIC_API_KEY (required), ALLOWED_ORIGIN (e.g. https://reetjaiswal.github.io), MODEL (optional).
 const hits = new Map();
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', process.env.ALLOWED_ORIGIN || '*');
@@ -7,18 +5,17 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ reply: 'POST only' });
-  // Basic rate limit: 20 requests per 10 minutes per IP (resets on cold start).
   const ip = (req.headers['x-forwarded-for'] || '').split(',')[0] || 'x';
   const now = Date.now(), arr = (hits.get(ip) || []).filter(t => now - t < 6e5);
   if (arr.length >= 20) return res.status(429).json({ reply: 'Too many requests. Please try again in a few minutes.' });
   arr.push(now); hits.set(ip, arr);
-
   const { question = '', jd = '', history = [], mode, profile = {} } = req.body || {};
   const system =
     "You are the assistant on Reet Jaiswal's portfolio website. Answer only from the profile JSON below, in the third person, concisely. " +
-    "If something is not in the profile, say so and suggest emailing him. Never invent experience, employers or skills." +
+    "If something is not in the profile, say so and suggest emailing her. Never invent experience, employers or skills. " +
+    "Reet is a woman and uses she/her pronouns. Always refer to Reet as she or her, never he, him. " +
     (mode === 'jd'
-      ? " The user will paste a job description. Give: a fit rating (Strong, Good or Partial), strengths with evidence from the profile, honest gaps, and one line on how Reet should position his application. Under 250 words."
+      ? " The user will paste a job description. Give: a fit rating (Strong, Good or Partial), strengths with evidence from the profile, honest gaps, and one line on how Reet should position her application. Under 250 words."
       : '') +
     '\n\nPROFILE:\n' + JSON.stringify(profile).slice(0, 20000);
   const past = (Array.isArray(history) ? history : [])
