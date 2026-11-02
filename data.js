@@ -52,7 +52,32 @@ const PROFILE = {
     { what: "CBSE Class X", where: "New Horizon Scholars School, Thane", when: "2020", note: "96.2%" }
   ],
   coursework: ["DSA", "Operating Systems", "DBMS", "Computer Networks", "OOP", "System Design", "SDLC"],
-  certifications: ["Career Essentials in Generative AI – Microsoft", "100 Days of Code: Python – Udemy", "Machine Learning Specialization – Stanford Online & DeepLearning.AI", "AWS Cloud Practitioner Essentials"],
+  certifications: [
+    {
+      name: "Career Essentials in Generative AI",
+      issuer: "Microsoft",
+      date: "2026",
+      file: "assets/certificates/microsoft-generative-ai.pdf"
+    },
+    {
+      name: "100 Days of Code: Python",
+      issuer: "Udemy",
+      date: "2026",
+      file: "assets/certificates/python-100-days.pdf"
+    },
+    {
+      name: "Machine Learning Specialization",
+      issuer: "Stanford Online & DeepLearning.AI",
+      date: "2026",
+      file: "assets/certificates/ml-specialization.pdf"
+    },
+    {
+      name: "AWS Cloud Practitioner Essentials",
+      issuer: "Amazon Web Services",
+      date: "2026",
+      file: "assets/certificates/aws-cloud-practitioner.pdf"
+    }
+  ],
   rocketry: {
     team: "Ignition, VIT Chennai – Rocketry Special Team",
     stack: ["Arduino", "Raspberry Pi Pico", "LoRa", "ANSYS", "SolidWorks"],
