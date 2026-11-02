@@ -63,7 +63,7 @@ const PROFILE = {
       name: "100 Days of Code: Python",
       issuer: "Udemy",
       date: "2026",
-      file: "assets/certificates/python-100-days.pdf"
+      file: "assets/certificates/100daystocode.pdf"
     },
     {
       name: "Machine Learning Specialization",
