@@ -1,6 +1,6 @@
 const PROFILE = {
   name: "Reet Jaiswal",
-  role: "Software Engineer and AI Engineer",
+  role: "Software and AI Engineer",
   pronouns: "she/her",
   tagline: "I build backend systems, AI agents and secure deployment pipelines.",
   location: "Mumbai, India",
@@ -11,7 +11,7 @@ const PROFILE = {
   resume: "ReetJaiswal.pdf", 
   AI_ENDPOINT: "",
   FORM_ENDPOINT: "https://formspree.io/f/xeaaplez",
-  summary: "Final-year Computer Science student at VIT Chennai with hands-on experience building backend systems, full-stack applications and automated deployment pipelines. Strong foundation in software engineering, AI-driven system architecture, information security and GenAI. Seeking a Software Engineer role to build reliable, scalable software within a collaborative team.",
+  summary: "Final-year Computer Science student at VIT Chennai with hands-on experience building backend systems, full-stack applications and automated deployment pipelines. Strong foundation in software engineering, AI-driven system architecture, information security and GenAI. Seeking a Software and AI Engineer role to build reliable, scalable software and intelligent systems within a collaborative team.",
   skills: {
     "Languages": ["Python", "Java", "C++", "JavaScript", "TypeScript", "SQL", "HTML", "CSS"],
     "Frameworks": ["React", "Next.js", "Node.js", "FastAPI", "RBAC", "JWT", "OAuth"],
