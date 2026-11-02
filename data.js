@@ -10,7 +10,7 @@ const PROFILE = {
   linkedin: "https://www.linkedin.com/in/reet-jaiswal/", 
   resume: "ReetJaiswal.pdf", 
   AI_ENDPOINT: "",
-  FORM_ENDPOINT: "",
+  FORM_ENDPOINT: "https://formspree.io/f/xeaaplez",
   summary: "Final-year Computer Science student at VIT Chennai with hands-on experience building backend systems, full-stack applications and automated deployment pipelines. Strong foundation in software engineering, AI-driven system architecture, information security and GenAI. Seeking a Software Engineer role to build reliable, scalable software within a collaborative team.",
   skills: {
     "Languages": ["Python", "Java", "C++", "JavaScript", "TypeScript", "SQL", "HTML", "CSS"],
